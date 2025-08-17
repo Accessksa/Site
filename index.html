@@ -19,6 +19,7 @@
     scroll-behavior:smooth;
   }
   .wrap{max-width:1100px;margin:0 auto;padding:24px;}
+
   /* Hero section */
   .hero{min-height:70vh;display:flex;align-items:center;justify-content:center;text-align:center;background:radial-gradient(60% 60% at 50% 40%, rgba(197,168,128,.18), transparent 60%);}
   .hero .card{background:rgba(0,0,0,.55);backdrop-filter:saturate(140%) blur(6px);padding:28px 26px;border-radius:18px;border:1px solid rgba(255,255,255,.06);box-shadow:0 20px 70px rgba(0,0,0,.5);}
@@ -27,25 +28,46 @@
   .sub{color:var(--muted);margin:0 0 18px;}
   .cta a{display:inline-block;padding:12px 18px;border-radius:12px;background:linear-gradient(135deg,var(--gold),#e3d2b4);color:#000;text-decoration:none;font-weight:700;}
   .cta a:hover{filter:brightness(1.05);}
+
   /* Sections */
   .section{padding:36px 16px;}
   .section h2{margin:0 0 14px;}
   .section ul li{margin-bottom:15px;}
+
   /* Partners scroller */
   .partners{padding:0 0 24px;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0) 40%);}
-  .scroller{overflow:hidden;white-space:nowrap;mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);}
+
+  /* مهم: نجبر الشريط على LTR */
+  .scroller{
+    overflow:hidden;
+    white-space:nowrap;
+    mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    direction:ltr;              /* تجاهل RTL داخل الحاوية */
+    unicode-bidi:isolate;       /* منع تأثير ثنائية الاتجاه */
+  }
+
   .logo-track{
     display:inline-flex;
+    flex-direction:row;         /* لا نعكس الاتجاه */
     gap:34px;
     align-items:center;
-    /* Slow down the scroll to make the partner logos move more elegantly */
     animation:scroll 60s linear infinite;
+    will-change:transform;      /* سلاسة أفضل */
+    direction:ltr;              /* تأكيد إضافي */
   }
-  .logo-track img{height:110px;object-fit:contain;filter:grayscale(.05) brightness(1.08);}
+
+  .logo-track img{
+    height:110px;
+    object-fit:contain;
+    filter:grayscale(.05) brightness(1.08);
+    flex:0 0 auto;              /* لا تنضغط ولا تلف للسطر */
+  }
+
   @keyframes scroll{
-    0% {transform:translateX(0);}
-    100% {transform:translateX(-50%);} /* move half of the track width for seamless loop */
+    0%   { transform:translateX(0); }      /* يبدأ من أول صورة */
+    100% { transform:translateX(-50%); }   /* لأننا مكررين المجموعة مرتين */
   }
+
   @media (max-width:560px){
     .logo-track img{height:90px;}
     .hero img.logo{max-width:220px;width:70vw;}
@@ -62,6 +84,7 @@
       <div class="cta"><a href="https://wa.me/966535403255" target="_blank" rel="noopener">تواصل عبر واتساب</a></div>
     </div>
   </section>
+
   <!-- Services section -->
   <section class="section wrap">
     <h2>الخدمات</h2>
@@ -73,15 +96,17 @@
     </ul>
     <div class="cta" style="margin-top:12px"><a href="https://wa.me/966535403255" target="_blank" rel="noopener">احجز الآن عبر واتساب</a></div>
   </section>
+
   <!-- Partners heading -->
   <section class="section wrap">
     <h2>شركاؤنا</h2>
   </section>
+
   <!-- Partners scroller -->
   <section class="partners">
     <div class="scroller">
       <div class="logo-track">
-        <!-- First set of partner logos -->
+        <!-- المجموعة الأولى -->
         <img src="partners/01.png" alt="partner">
         <img src="partners/02.png" alt="partner">
         <img src="partners/03.png" alt="partner">
@@ -99,24 +124,25 @@
         <img src="partners/15.jpeg" alt="partner">
         <img src="partners/16.png" alt="partner">
         <img src="partners/17.png" alt="partner">
-        <!-- Duplicate set for seamless scrolling -->
-        <img src="partners/01.png" alt="partner">
-        <img src="partners/02.png" alt="partner">
-        <img src="partners/03.png" alt="partner">
-        <img src="partners/04.png" alt="partner">
-        <img src="partners/05.png" alt="partner">
-        <img src="partners/06.jpeg" alt="partner">
-        <img src="partners/07.jpeg" alt="partner">
-        <img src="partners/08.jpeg" alt="partner">
-        <img src="partners/09.png" alt="partner">
-        <img src="partners/10.png" alt="partner">
-        <img src="partners/11.jpeg" alt="partner">
-        <img src="partners/12.png" alt="partner">
-        <img src="partners/13.png" alt="partner">
-        <img src="partners/14.png" alt="partner">
-        <img src="partners/15.jpeg" alt="partner">
-        <img src="partners/16.png" alt="partner">
-        <img src="partners/17.png" alt="partner">
+
+        <!-- تكرار نفس المجموعة للّوب الانسيابي -->
+        <img src="partners/01.png" alt="partner" aria-hidden="true">
+        <img src="partners/02.png" alt="partner" aria-hidden="true">
+        <img src="partners/03.png" alt="partner" aria-hidden="true">
+        <img src="partners/04.png" alt="partner" aria-hidden="true">
+        <img src="partners/05.png" alt="partner" aria-hidden="true">
+        <img src="partners/06.jpeg" alt="partner" aria-hidden="true">
+        <img src="partners/07.jpeg" alt="partner" aria-hidden="true">
+        <img src="partners/08.jpeg" alt="partner" aria-hidden="true">
+        <img src="partners/09.png" alt="partner" aria-hidden="true">
+        <img src="partners/10.png" alt="partner" aria-hidden="true">
+        <img src="partners/11.jpeg" alt="partner" aria-hidden="true">
+        <img src="partners/12.png" alt="partner" aria-hidden="true">
+        <img src="partners/13.png" alt="partner" aria-hidden="true">
+        <img src="partners/14.png" alt="partner" aria-hidden="true">
+        <img src="partners/15.jpeg" alt="partner" aria-hidden="true">
+        <img src="partners/16.png" alt="partner" aria-hidden="true">
+        <img src="partners/17.png" alt="partner" aria-hidden="true">
       </div>
     </div>
   </section>
