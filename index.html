@@ -39,12 +39,12 @@
     gap:34px;
     align-items:center;
     /* Slow down the scroll to make the partner logos move more elegantly */
-    animation:scroll 90s linear infinite;
+    animation:scroll 60s linear infinite;
   }
   .logo-track img{height:110px;object-fit:contain;filter:grayscale(.05) brightness(1.08);}
   @keyframes scroll{
-    from{transform:translateX(0);}
-    to{transform:translateX(-50%);} /* move half of the track width for seamless loop */
+    0% {transform:translateX(0);}
+    100% {transform:translateX(-50%);} /* move half of the track width for seamless loop */
   }
   @media (max-width:560px){
     .logo-track img{height:90px;}
